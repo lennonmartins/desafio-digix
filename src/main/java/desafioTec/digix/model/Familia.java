@@ -4,8 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class Familia {
-    int rendaTotalFamilia;
-    int totaisDedependentes;
+    private int rendaTotal;
+    private int totaisDedependentes;
+    private int pontuacao = 0;
 
     public Familia(int renda, int dependentes) {
         if (renda < 0) {
@@ -15,8 +16,11 @@ public class Familia {
             throw new IllegalArgumentException("Número de dependentes não pode ser negativo");
         }
 
-        this.rendaTotalFamilia = renda;
+        this.rendaTotal = renda;
         this.totaisDedependentes = dependentes;
     }
 
+    public void adicionarPontuacao(int pontuacao){
+        this.pontuacao += pontuacao;
+    }
 }

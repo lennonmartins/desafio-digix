@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import desafioTec.digix.model.builder.FamiliaBuilder;
+
 public class FamiliaTest {
 
     @Test
@@ -14,7 +16,7 @@ public class FamiliaTest {
 
         Familia familia = new Familia(800,3);
 
-        assertEquals(rendaEsperada, familia.getRendaTotalFamilia());
+        assertEquals(rendaEsperada, familia.getRendaTotal());
         assertEquals(numeroDependentesEsperado, familia.getTotaisDedependentes());
     }
 
@@ -28,5 +30,12 @@ public class FamiliaTest {
     public void nao_deve_criar_familia_com_dependentes_negativos(){
         int dependentesTotais  = -1;
         assertThrows(IllegalArgumentException.class, () -> new Familia(800, dependentesTotais));
+    }
+
+    @Test
+    public void deve_criar_familia_com_pontos_nulos(){
+        int pontosEsperados = 0;
+        Familia familia = new FamiliaBuilder().criar();
+        assertEquals(pontosEsperados, familia.getPontuacao());
     }
 }
