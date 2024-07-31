@@ -23,8 +23,6 @@ public class Familia {
         this.rendaTotal = obterRendaValida(rendaTotal);
         this.dependentes = Collections
                 .unmodifiableList(Objects.requireNonNull(dependentes, MensagensErro.NUMERO_DEPENDENTES_NULOS));
-        this.representante = representante;
-        this.rendaTotal = rendaTotal;
     }
 
     private Representante obterRepresentanteValido(Representante representante) {

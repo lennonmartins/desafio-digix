@@ -11,7 +11,7 @@ public class ObtemFamilia implements IObtemFamilia {
     }
 
     @Override
-    public Familia ObterComPontuacao(Familia familia) {
+    public Familia obterComPontuacao(Familia familia) {
         int pontuacaoFamilia = this.calculadoraPontuacao.calcularPontuacaoTotal(familia);
         familia.adicionarPontuacao(pontuacaoFamilia);
         return familia;

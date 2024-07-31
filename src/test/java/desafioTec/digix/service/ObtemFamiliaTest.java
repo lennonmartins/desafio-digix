@@ -31,7 +31,7 @@ public class ObtemFamiliaTest {
 
         Familia familiaCom3Dependentes = new FamiliaBuilderTest().comRenda(800).comDependente(dependente1).comDependente(dependente2).criar();
 
-        var familiaPontuada = obtemFamilia.ObterComPontuacao(familiaCom3Dependentes);
+        var familiaPontuada = obtemFamilia.obterComPontuacao(familiaCom3Dependentes);
 
         assertEquals(pontuacaoEsperada, familiaPontuada.getPontuacao());
     }
