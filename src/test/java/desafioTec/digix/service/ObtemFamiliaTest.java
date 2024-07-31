@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import desafioTec.digix.model.Dependente;
 import desafioTec.digix.model.Familia;
+import desafioTec.digix.model.builder.DependenteBuilderTest;
+import desafioTec.digix.model.builder.FamiliaBuilderTest;
 
 public class ObtemFamiliaTest {
     
@@ -22,10 +25,13 @@ public class ObtemFamiliaTest {
 
     @Test
     void deve_obter_familia_com_pontucao(){
-        int pontuacaoEsperada = 7;
-        Familia familia = new Familia(800, 2);
+        int pontuacaoEsperada = 8;
+        Dependente dependente1 = new DependenteBuilderTest().criar();
+        Dependente dependente2 = new DependenteBuilderTest().criar();
 
-        var familiaPontuada = obtemFamilia.ObterComPontuacao(familia);
+        Familia familiaCom3Dependentes = new FamiliaBuilderTest().comRenda(800).comDependente(dependente1).comDependente(dependente2).criar();
+
+        var familiaPontuada = obtemFamilia.ObterComPontuacao(familiaCom3Dependentes);
 
         assertEquals(pontuacaoEsperada, familiaPontuada.getPontuacao());
     }

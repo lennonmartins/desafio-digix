@@ -6,6 +6,6 @@ public class CriterioDependentes3ouMais implements CriterioPontuacao{
 
     @Override
     public int calcularPontucao(Familia familia) {
-        return familia.getTotaisDedependentes() >= 3 ? 3 : 0;
+        return familia.getTotaisDedependentesValidos() >= 3 ? 3 : 0;
     }
 }

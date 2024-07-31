@@ -2,78 +2,72 @@ package desafioTec.digix.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import desafioTec.digix.model.Dependente;
 import desafioTec.digix.model.Familia;
+import desafioTec.digix.model.Representante;
+import desafioTec.digix.model.builder.DependenteBuilderTest;
+import desafioTec.digix.model.builder.RepresentanteBuilderTest;
 
 public class CalculadoraPontuacaoTest {
 
-    private CalculadoraPontuacao calculadoraPontuacao;
+        private CalculadoraPontuacao calculadoraPontuacao;
 
-    @BeforeEach
-    public void setUp(){
-        CriterioFactory criterioFactory = new CriterioFactory();  
-        calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory.criarCriterios());
-    }
+        @BeforeEach
+        public void setUp() {
+                CriterioFactory criterioFactory = new CriterioFactory();
+                calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory.criarCriterios());
+        }
 
-    @Test
-    public void deve_pontuar_familia_com_renda_ate_faixa_minima_e_maximo_dependentes(){
-        int potuacaoEsperada = 8;
-        int rendaMinina = 900;
-        Familia familia = new Familia(rendaMinina, 3);
-        int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
-        assertEquals(potuacaoEsperada, pontuacaoTotal);
-    }
+        public static Stream<Arguments> fornecerDadosParaTesteDePontuacao() {
+                Representante representante = new RepresentanteBuilderTest().criar();
 
-    @Test
-    public void deve_pontuar_familia_com_renda_intermediaria_e_maximo_de_dependentes(){
-        int potuacaoEsperada = 6;
-        int rendaIntermediaria = 1495;
-        Familia familia = new Familia(rendaIntermediaria, 3);
-        int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
-        assertEquals(potuacaoEsperada, pontuacaoTotal);
-    }
+                List<Dependente> listaCom3dependentes = criarListaDeDependentes(3);
+                List<Dependente> listaCom2Dependentes = criarListaDeDependentes(2);
+                List<Dependente> listaSemDependentes = new ArrayList<>();
+                return Stream.of(
+                                Arguments.of(8, representante, 900, listaCom3dependentes,
+                                                "deve pontuar familia com renda até faixa mínima e máximo dependentes"),
+                                Arguments.of(6, representante, 1495, listaCom3dependentes,
+                                                "deve pontuar familia com renda intermediária e máximo de dependentes"),
+                                Arguments.of(5, representante, 1495, listaCom2Dependentes,
+                                                "deve pontuar familia com renda intermediária e mínimo de dependentes"),
+                                Arguments.of(0, representante, 2200, listaSemDependentes,
+                                                "deve pontuar familia com renda além máxima sem dependentes"),
+                                Arguments.of(5, representante, 0, listaSemDependentes,
+                                                "deve pontuar familia sem renda e sem dependentes"),
+                                Arguments.of(8, representante, 0, listaCom3dependentes,
+                                                "deve pontuar familia sem renda com máximo dependentes"));
+        }
 
-    @Test
-    public void deve_pontuar_familia_com_renda_intermediaria_e_minimo_de_dependentes(){
-        int potuacaoEsperada = 5;
-        int rendaIntermediaria = 1495;
-        int dependentes = 2;
-        Familia familia = new Familia(rendaIntermediaria, dependentes);
-        int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
-        assertEquals(potuacaoEsperada, pontuacaoTotal);
-    }
+        @ParameterizedTest
+        @MethodSource("fornecerDadosParaTesteDePontuacao")
+        @DisplayName("Testes Parametrizados para Pontuação de Famílias")
+        public void deve_pontuar_familia_seguindo_criterios(int pontuacaoEsperada, Representante representante,
+                        int renda,
+                        List<Dependente> dependentes) {
+                Familia familia = new Familia(representante, renda, dependentes);
 
-    @Test
-    public void deve_pontuar_familia_com_renda_alem_maxima_sem_dependentes(){
-        int potuacaoEsperada = 0;
-        int rendaIntermediaria = 2200;
-        int dependentes = 0;
-        Familia familia = new Familia(rendaIntermediaria, dependentes);
-        int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
-        assertEquals(potuacaoEsperada, pontuacaoTotal);
-    }
+                int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
 
-    @Test
-    public void deve_pontuar_familia_sem_renda_e_sem_dependentes(){
-        int potuacaoEsperada = 5;
-        int rendaIntermediaria = 0;
-        int dependentes = 0;
-        Familia familia = new Familia(rendaIntermediaria, dependentes);
-        int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
-        assertEquals(potuacaoEsperada, pontuacaoTotal);
-    }
+                assertEquals(pontuacaoEsperada, pontuacaoTotal);
+        }
 
-    @Test
-    public void deve_pontuar_familia_sem_renda_com_maximo_dependentes(){
-        int potuacaoEsperada = 8;
-        int rendaIntermediaria = 0;
-        int dependentes = 5;
-        Familia familia = new Familia(rendaIntermediaria, dependentes);
-        int pontuacaoTotal = calculadoraPontuacao.calcularPontuacaoTotal(familia);
-        assertEquals(potuacaoEsperada, pontuacaoTotal);
-    }
-
+        private static List<Dependente> criarListaDeDependentes(int quantidade) {
+                List<Dependente> dependentes = new ArrayList<>();
+                DependenteBuilderTest dependenteBuilder = new DependenteBuilderTest();
+                for (int i = 0; i < quantidade; i++) {
+                        dependentes.add(dependenteBuilder.criar());
+                }
+                return dependentes;
+        }
 }
-

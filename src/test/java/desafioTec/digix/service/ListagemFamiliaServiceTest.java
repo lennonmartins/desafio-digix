@@ -9,8 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import desafioTec.digix.model.Dependente;
 import desafioTec.digix.model.Familia;
-import desafioTec.digix.model.builder.FamiliaBuilder;
+import desafioTec.digix.model.builder.DependenteBuilderTest;
+import desafioTec.digix.model.builder.FamiliaBuilderTest;
 
 public class ListagemFamiliaServiceTest {
 
@@ -29,9 +31,10 @@ public class ListagemFamiliaServiceTest {
 
     @Test
     public void deve_ordenar_lista_de_familia_pela_maior_pontuacao() {
-        Familia familia1 = new FamiliaBuilder().comRenda(800).comDependentes(3).criar();
-        Familia familia2 = new FamiliaBuilder().comRenda(1000).comDependentes(1).criar();
-        Familia familia3 = new FamiliaBuilder().comRenda(1600).comDependentes(1).criar();
+        Dependente dependente = new DependenteBuilderTest().criar();
+        Familia familia1 = new FamiliaBuilderTest().comRenda(800).comDependente(dependente).comDependente(dependente).criar();
+        Familia familia2 = new FamiliaBuilderTest().comRenda(1000).criar();
+        Familia familia3 = new FamiliaBuilderTest().comRenda(1600).criar();
 
         List<Familia> familias = new ArrayList<>(Arrays.asList(familia2, familia3, familia1));
         var listagemOrdenada = familiaService.ordernarListaDeFamiliaPorPonto(familias);
