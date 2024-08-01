@@ -14,7 +14,6 @@ public class Familia {
     private Representante representante;
     private double rendaTotal;
     private List<Dependente> dependentes = new ArrayList<>();
-    private int totaisDedependentesValidos;
     private int pontuacao = 0;
     private Conjuge conjuge;
 
@@ -41,7 +40,7 @@ public class Familia {
         return rendaTotal;
     }
 
-    public void filtrarDependentesValidosParaSorteio() {
+    private int filtrarDependentesValidosParaSorteio() {
         int dependentesValidos = 0;
         LocalDate hoje = LocalDate.now();
         for (var dependente : this.dependentes) {
@@ -49,7 +48,7 @@ public class Familia {
                 dependentesValidos++;
             }
         }
-        this.totaisDedependentesValidos = dependentesValidos;
+        return dependentesValidos;
     }
 
     private boolean ehDependenteValido(Dependente dependente, LocalDate hoje) {
@@ -62,7 +61,7 @@ public class Familia {
     }
 
     public int obterTotaisDedependentesValidos(){
-        filtrarDependentesValidosParaSorteio();
-        return this.totaisDedependentesValidos;
+        
+        return filtrarDependentesValidosParaSorteio();
     }
 }

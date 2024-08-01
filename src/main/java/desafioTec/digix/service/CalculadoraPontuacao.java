@@ -19,7 +19,6 @@ public class CalculadoraPontuacao {
     }
 
     public int calcularPontuacaoTotal(Familia familia) {
-        familia.filtrarDependentesValidosParaSorteio();
         int pontuacaoTotal = 0;
         for (CriterioPontuacao criterio : criterios) {
             pontuacaoTotal += criterio.calcularPontucao(familia);

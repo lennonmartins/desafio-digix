@@ -18,9 +18,9 @@ public class Cpf {
         if (valorCpf == null || valorCpf.isEmpty() || !valorCpf.matches("\\d{11}")) {
             throw new IllegalArgumentException(MensagensErro.CPF_INVALIDO);
         }
-        if (!ehCpfValido(valorCpf)) {
-            throw new IllegalArgumentException(MensagensErro.CPF_INVALIDO);
-        }
+       if (!ehCpfValido(valorCpf)) {
+           throw new IllegalArgumentException(MensagensErro.CPF_INVALIDO);
+       }
     }
 
     private boolean ehCpfValido(String cpf) {

@@ -57,9 +57,9 @@ public class FamiliaTest {
         int dependentesValidosDoSorteio = 1;
         int dependentesTotais = 2;
         Familia familia = new FamiliaBuilderTest().comDependente(dependenteAdulto).criar();
-        familia.filtrarDependentesValidosParaSorteio();
+        int dependentesValidosRetornados = familia.obterTotaisDedependentesValidos();
         
-        assertEquals(dependentesValidosDoSorteio, familia.obterTotaisDedependentesValidos());
+        assertEquals(dependentesValidosDoSorteio, dependentesValidosRetornados);
         assertEquals(dependentesTotais, familia.getDependentes().size());
     }
 
