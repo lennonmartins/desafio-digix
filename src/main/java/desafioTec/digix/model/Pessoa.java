@@ -16,7 +16,7 @@ public abstract class Pessoa {
     }
 
     public Pessoa(String nome, Cpf cpf, LocalDate dataDeNascimento) {
-        this.nome = validaNome(nome);
+        this.nome = validarNome(nome);
         this.cpf = cpf;
         this.dataDeNascimento = validarDataDeNascimento(dataDeNascimento);
     }
@@ -29,7 +29,7 @@ public abstract class Pessoa {
         return dataDeNascimento;
     }
 
-    private String validaNome(String nome) {
+    private String validarNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException(MensagensErro.NOME_NULO_OU_VAZIO);
         }
