@@ -11,7 +11,7 @@ import desafioTec.digix.dto.RepresentanteDto;
 
 public class FamiliaRequestDtoBuilder {
     private RepresentanteDto representante;
-    private int renda;
+    private double renda;
     private List<DependenteDto> dependentes;
     private ConjugeDto conjuge;
 
@@ -27,7 +27,7 @@ public class FamiliaRequestDtoBuilder {
         return this;
     }
 
-    public FamiliaRequestDtoBuilder comRenda(int renda) {
+    public FamiliaRequestDtoBuilder comRenda(double renda) {
         this.renda = renda;
         return this;
     }

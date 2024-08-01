@@ -16,29 +16,29 @@ import desafioTec.digix.model.valor.Cpf;
 
 @Mapper
 public interface IFamiliaMapper {
-    IFamiliaMapper INSTANCE = Mappers.getMapper(IFamiliaMapper.class);
-
-    @Mapping(source = "representante.cpf", target = "representante.cpf", qualifiedByName = "cpfToString")
-    @Mapping(source = "conjuge.cpf", target = "conjuge.cpf", qualifiedByName = "cpfToString")
-    FamiliaResponseDto toDto(Familia model);
-
-    @Named("cpfToString")
-    default String cpfToString(Cpf cpf) {
-        return cpf.getValorCpf();
-    }
+        IFamiliaMapper INSTANCE = Mappers.getMapper(IFamiliaMapper.class);
     
-    @Mapping(target = "representante.dataDeNascimento", source = "representante.dataDeNascimento")
-    @Mapping(target = "representante.nome", source = "representante.nome")
-    @Mapping(target = "rendaTotal", source = "rendaTotal")
-    Familia toModel(FamiliaRequestDto dto);
-
-    @Mapping(target = "dataDeNascimento", source = "dataDeNascimento")
-    @Mapping(target = "nome", source = "nome")
-    Representante toModel(RepresentanteDto dto);
-
-    @Mapping(target = "dataDeNascimento", source = "dataDeNascimento")
-    @Mapping(target = "nome", source = "nome")
-    @Mapping(target = "cpf", source = "cpf")
-    Conjuge toModel(ConjugeDto dto);
+        @Mapping(source = "representante.cpf", target = "representante.cpf", qualifiedByName = "cpfToString")
+        @Mapping(source = "conjuge.cpf", target = "conjuge.cpf", qualifiedByName = "cpfToString")
+        FamiliaResponseDto toDto(Familia model);
+    
+        @Named("cpfToString")
+        default String cpfToString(Cpf cpf) {
+            return cpf.getValorCpf();
+        }
+        
+        @Mapping(target = "representante.dataDeNascimento", source = "representante.dataDeNascimento")
+        @Mapping(target = "representante.nome", source = "representante.nome")
+        @Mapping(target = "rendaTotal", source = "rendaTotal")
+        Familia toModel(FamiliaRequestDto dto);
+    
+        @Mapping(target = "dataDeNascimento", source = "dataDeNascimento")
+        @Mapping(target = "nome", source = "nome")
+        Representante toModel(RepresentanteDto dto);
+    
+        @Mapping(target = "dataDeNascimento", source = "dataDeNascimento")
+        @Mapping(target = "nome", source = "nome")
+        @Mapping(target = "cpf", source = "cpf")
+        Conjuge toModel(ConjugeDto dto);
     
 }

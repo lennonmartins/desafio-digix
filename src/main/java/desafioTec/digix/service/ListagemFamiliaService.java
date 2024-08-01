@@ -21,7 +21,7 @@ public class ListagemFamiliaService implements IListagemFamiliaService {
                 .collect(Collectors.toList());
 
         var familiasOrdenadas = familiasPontuadas.stream().sorted(
-                Comparator.comparingInt(Familia::getPontuacao).reversed().thenComparingInt(Familia::getRendaTotal))
+                Comparator.comparingInt(Familia::getPontuacao).reversed().thenComparingDouble(Familia::getRendaTotal))
                 .collect(Collectors.toList());
 
         return familiasOrdenadas;

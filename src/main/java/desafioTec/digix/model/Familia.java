@@ -12,13 +12,13 @@ import lombok.Getter;
 @Getter
 public class Familia {
     private Representante representante;
-    private int rendaTotal;
+    private double rendaTotal;
     private List<Dependente> dependentes = new ArrayList<>();
     private int totaisDedependentesValidos;
     private int pontuacao = 0;
     private Conjuge conjuge;
 
-    public Familia(Representante representante, int rendaTotal, List<Dependente> dependentes, Conjuge conjuge) {
+    public Familia(Representante representante, double rendaTotal, List<Dependente> dependentes, Conjuge conjuge) {
 
         this.representante = validarRepresentante(representante);
         this.rendaTotal = validarRenda(rendaTotal);
@@ -34,7 +34,7 @@ public class Familia {
         return representante;
     }
 
-    private int validarRenda(int rendaTotal) {
+    private double validarRenda(Double rendaTotal) {
         if (rendaTotal < 0) {
             throw new IllegalArgumentException(MensagensErro.RENDA_NEGATIVA);
         }

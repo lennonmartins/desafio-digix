@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class FamiliaBuilderTest {
-    private int rendaTotal;
+    private double rendaTotal;
     private int totaisDedependentes;
     private int pontuacao = 0;
     private Representante representante;
@@ -30,7 +30,7 @@ public class FamiliaBuilderTest {
         return new Familia(representante, rendaTotal, dependentes, conjuge);
     }
 
-    public FamiliaBuilderTest comRenda(int renda) {
+    public FamiliaBuilderTest comRenda(double renda) {
         this.rendaTotal = renda;
         return this;
     }

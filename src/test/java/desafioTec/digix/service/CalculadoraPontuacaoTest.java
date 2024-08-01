@@ -57,7 +57,7 @@ public class CalculadoraPontuacaoTest {
         @MethodSource("fornecerDadosParaTesteDePontuacao")
         @DisplayName("Testes Parametrizados para Pontuação de Famílias")
         public void deve_pontuar_familia_seguindo_criterios(int pontuacaoEsperada, Representante representante,
-                        int renda,
+                        double renda,
                         List<Dependente> dependentes, Conjuge conjuge) {
                 Familia familia = new Familia(representante, renda, dependentes, conjuge);
 

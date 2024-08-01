@@ -27,7 +27,7 @@ public class FamiliaTest {
         Dependente dependenteValido = new DependenteBuilderTest().criar();
         Conjuge conjugeValido = new ConjugeBuilderTest().criar();
         Representante representanteNulo = null;
-        int rendaNegativa = -100;
+        double rendaNegativa = -100;
         return Stream.of(
                 Arguments.of(representanteNulo, 100, dependenteValido,conjugeValido,
                         MensagensErro.REPRESENTANTE_NULO),
@@ -37,7 +37,7 @@ public class FamiliaTest {
 
     @Test
     public void deve_criar_familia_com_valores_validos() {
-        int rendaEsperada = 800;
+        double rendaEsperada = 800;
         int numeroDependentesEsperado = 1;
         Representante representante = new RepresentanteBuilderTest().criar();
         Conjuge conjuge = new ConjugeBuilderTest().criar();
@@ -74,7 +74,7 @@ public class FamiliaTest {
     @MethodSource("forneceFamiliaComDadosNegativos")
     public void nao_deve_criar_familia_com_dependentes_ou_renda_negativa_ou_reprsentante_nulo(
             Representante representante,
-            int rendaDaFamilia, Dependente dependentesDaFamilia, Conjuge conjugeValido,
+            double rendaDaFamilia, Dependente dependentesDaFamilia, Conjuge conjugeValido,
             String mensagemDeErroEsperada) {
 
         List<Dependente> dependentes = new ArrayList<>();
