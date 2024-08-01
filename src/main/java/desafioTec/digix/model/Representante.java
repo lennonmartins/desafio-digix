@@ -6,8 +6,8 @@ import desafioTec.digix.model.valor.Cpf;
 
 public class Representante extends Pessoa {
 
-    public Representante(String nome, String cpf, LocalDate dataNascimento) {
-        super(nome, new Cpf(cpf), dataNascimento);
+    public Representante(String nome, String cpf, LocalDate dataDeNascimento) {
+        super(nome, new Cpf(cpf), dataDeNascimento);
     }
 
 }

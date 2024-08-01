@@ -4,12 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import desafioTec.digix.controller.builder.FamiliaRequestDtoBuilder;
 import desafioTec.digix.dtos.FamiliaRequestDto;
 
-@SpringBootTest
+
 public class FamiliaServiceTest {
 
     private IFamiliaService familiaService;

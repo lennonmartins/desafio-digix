@@ -10,16 +10,16 @@ public class RepresentanteBuilderTest {
 
     private String nome;
     private String cpf;
-    private LocalDate dataNascimento;
+    private LocalDate dataDeNascimento;
 
     public RepresentanteBuilderTest() {
         this.nome = "Lenoardo dos Santos";
         this.cpf = "01756232288";
-        this.dataNascimento = LocalDate.of(1995, 1, 21);
+        this.dataDeNascimento = LocalDate.of(1995, 1, 21);
     }
 
     public Representante criar() {
-        return new Representante(this.nome, this.cpf, this.dataNascimento);
+        return new Representante(this.nome, this.cpf, this.dataDeNascimento);
     }
 
     public RepresentanteBuilderTest comNome(String nome) {
@@ -32,8 +32,8 @@ public class RepresentanteBuilderTest {
         return this;
     }
 
-    public RepresentanteBuilderTest comDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public RepresentanteBuilderTest comdataDeNascimento(LocalDate dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
         return this;
     }
 }

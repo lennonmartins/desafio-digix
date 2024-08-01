@@ -9,24 +9,24 @@ import lombok.Getter;
 public abstract class Pessoa {
     private String nome;
     private Cpf cpf;
-    private LocalDate dataNascimento;
+    private LocalDate dataDeNascimento;
 
-    public Pessoa(String nome, LocalDate dataNascimento) {
-        this(nome, null, dataNascimento);
+    public Pessoa(String nome, LocalDate dataDeNascimento) {
+        this(nome, null, dataDeNascimento);
     }
 
-    public Pessoa(String nome, Cpf cpf, LocalDate dataNascimento) {
+    public Pessoa(String nome, Cpf cpf, LocalDate dataDeNascimento) {
         this.nome = validaNome(nome);
         this.cpf = cpf;
-        this.dataNascimento = validarDataDeNascimento(dataNascimento);
+        this.dataDeNascimento = validarDataDeNascimento(dataDeNascimento);
     }
 
-    private LocalDate validarDataDeNascimento(LocalDate dataNascimento) {
-        if (dataNascimento == null) {
+    private LocalDate validarDataDeNascimento(LocalDate dataDeNascimento) {
+        if (dataDeNascimento == null) {
             throw new IllegalArgumentException(MensagensErro.DATA_DE_NASCIMENTO_VAZIA_OU_NULA);
         }
 
-        return dataNascimento;
+        return dataDeNascimento;
     }
 
     private String validaNome(String nome) {

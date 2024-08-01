@@ -14,9 +14,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class DependenteTest {
 
     private static Stream<Arguments> forneceDependenteComDadosAusentes() {
-        LocalDate dataNascimentoValida = LocalDate.of(2010, 1, 21);
+        LocalDate dataDeNascimentoValida = LocalDate.of(2010, 1, 21);
         return Stream.of(
-                Arguments.of("", dataNascimentoValida,
+                Arguments.of("", dataDeNascimentoValida,
                         MensagensErro.NOME_NULO_OU_VAZIO),
                 Arguments.of("João Silva", null,
                         MensagensErro.DATA_DE_NASCIMENTO_VAZIA_OU_NULA));

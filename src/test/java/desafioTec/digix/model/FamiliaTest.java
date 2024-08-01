@@ -48,7 +48,7 @@ public class FamiliaTest {
 
     @Test
     public void deve_criar_familia_com_dependentes_maiores_de_18_anos() {
-        Dependente dependenteAdulto = new DependenteBuilderTest().comDataNascimento(LocalDate.of(1995, 01, 21)).criar();
+        Dependente dependenteAdulto = new DependenteBuilderTest().comDataDeNascimento(LocalDate.of(1995, 01, 21)).criar();
         int dependentesValidosDoSorteio = 1;
         int dependentesTotais = 2;
         Familia familia = new FamiliaBuilderTest().comDependente(dependenteAdulto).criar();

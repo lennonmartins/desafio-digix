@@ -16,7 +16,7 @@ public class ListagemFamiliaService implements IListagemFamiliaService {
 
     public List<Familia> ordernarListaDeFamiliaPorPonto(List<Familia> familias) {
         // Obtem listagem de familias pontuadas
-        List<Familia> familiasPontuadas = familias.stream().map(obtemFamilia::ObterComPontuacao)
+        List<Familia> familiasPontuadas = familias.stream().map(obtemFamilia::obterComPontuacao)
                 .collect(Collectors.toList());
 
         // Obtem listagem de familias pontuadas ordenadas

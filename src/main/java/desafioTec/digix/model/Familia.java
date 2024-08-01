@@ -51,8 +51,8 @@ public class Familia {
     }
 
     private boolean ehDependenteValido(Dependente dependente, LocalDate hoje) {
-        return dependente.getDataNascimento() != null &&
-                Period.between(dependente.getDataNascimento(), hoje).getYears() <= 18;
+        return dependente.getDataDeNascimento() != null &&
+                Period.between(dependente.getDataDeNascimento(), hoje).getYears() <= 18;
     }
 
     public void adicionarPontuacao(int pontuacao) {

@@ -9,15 +9,15 @@ import lombok.Getter;
 public class DependenteBuilderTest {
 
     private String nome;
-    private LocalDate dataNascimento;
+    private LocalDate dataDeNascimento;
 
     public DependenteBuilderTest() {
         this.nome = "Lenoardo dos Santos";
-        this.dataNascimento = LocalDate.of(2010, 1, 21);
+        this.dataDeNascimento = LocalDate.of(2010, 1, 21);
     }
 
     public Dependente criar() {
-        return new Dependente(this.nome, this.dataNascimento);
+        return new Dependente(this.nome, this.dataDeNascimento);
     }
 
     public DependenteBuilderTest comNome(String nome) {
@@ -25,8 +25,8 @@ public class DependenteBuilderTest {
         return this;
     }
 
-    public DependenteBuilderTest comDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public DependenteBuilderTest comDataDeNascimento(LocalDate dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
         return this;
     }
 }

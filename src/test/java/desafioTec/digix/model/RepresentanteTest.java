@@ -15,11 +15,11 @@ public class RepresentanteTest {
 
     private static Stream<Arguments> forneceRepresentanteComDadosAusentes() {
         String cpfValido = "01756232288";
-        LocalDate dataNascimentoValida = LocalDate.of(1995, 1, 21);
+        LocalDate dataDeNascimentoValida = LocalDate.of(1995, 1, 21);
         return Stream.of(
-                Arguments.of("", cpfValido, dataNascimentoValida,
+                Arguments.of("", cpfValido, dataDeNascimentoValida,
                         MensagensErro.NOME_NULO_OU_VAZIO),
-                Arguments.of("João Silva", "", dataNascimentoValida,
+                Arguments.of("João Silva", "", dataDeNascimentoValida,
                         MensagensErro.CPF_INVALIDO),
                 Arguments.of("João Silva", cpfValido, null,
                         MensagensErro.DATA_DE_NASCIMENTO_VAZIA_OU_NULA));
@@ -35,7 +35,7 @@ public class RepresentanteTest {
 
         assertEquals(nomeDoRepresentante, representante.getNome());
         assertEquals(cpfDoRepresentante, representante.getCpf().getValorCpf());
-        assertEquals(dataDeNascimento, representante.getDataNascimento());
+        assertEquals(dataDeNascimento, representante.getDataDeNascimento());
     }
 
     @ParameterizedTest

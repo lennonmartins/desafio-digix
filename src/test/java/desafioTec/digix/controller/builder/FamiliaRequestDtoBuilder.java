@@ -14,7 +14,7 @@ public class FamiliaRequestDtoBuilder {
     private List<DependenteDto> dependentes;
 
     public FamiliaRequestDtoBuilder() {
-        this.representante = new RepresentanteDto("", LocalDate.now(), "");
+        this.representante = new RepresentanteDto("Lennon Martins", LocalDate.of(1995, 2, 21), "01756232288");
         this.renda = 800;
         this.dependentes = new ArrayList<>();
     }
