@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import desafioTec.digix.model.Conjuge;
 import desafioTec.digix.model.Dependente;
@@ -20,6 +21,7 @@ import desafioTec.digix.model.builder.ConjugeBuilderTest;
 import desafioTec.digix.model.builder.DependenteBuilderTest;
 import desafioTec.digix.model.builder.RepresentanteBuilderTest;
 
+@SpringBootTest
 public class CalculadoraPontuacaoTest {
 
         private CalculadoraPontuacao calculadoraPontuacao;
@@ -27,7 +29,7 @@ public class CalculadoraPontuacaoTest {
         @BeforeEach
         public void setUp() {
                 CriterioFactory criterioFactory = new CriterioFactory();
-                calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory.criarCriterios());
+                calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory);
         }
 
         public static Stream<Arguments> fornecerDadosParaTesteDePontuacao() {

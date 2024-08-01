@@ -2,15 +2,20 @@ package desafioTec.digix.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import desafioTec.digix.criteria.CriterioPontuacao;
 import desafioTec.digix.model.Familia;
 
+@Service
 public class CalculadoraPontuacao {
 
     private List<CriterioPontuacao> criterios;
+    private final ICriterioFactory criterioFactory;
 
-    public CalculadoraPontuacao(List<CriterioPontuacao> criterios) {
-        this.criterios = criterios;
+    public CalculadoraPontuacao(ICriterioFactory _criterioFactory) {
+        this.criterioFactory = _criterioFactory;
+        this.criterios = criterioFactory.criarCriterios();
     }
 
     public int calcularPontuacaoTotal(Familia familia) {

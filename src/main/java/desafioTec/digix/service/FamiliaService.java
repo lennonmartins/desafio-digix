@@ -3,15 +3,24 @@ package desafioTec.digix.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import desafioTec.digix.dtos.FamiliaRequestDto;
-import desafioTec.digix.dtos.FamiliaResponseDto;
+import org.springframework.stereotype.Service;
+
+import desafioTec.digix.dto.FamiliaRequestDto;
+import desafioTec.digix.dto.FamiliaResponseDto;
 import desafioTec.digix.model.Familia;
+import desafioTec.digix.repository.IFamiliaRepository;
 import desafioTec.digix.service.mappers.IFamiliaMapper;
 
+@Service
 public class FamiliaService implements IFamiliaService {
 
     private final List<Familia> familias = new ArrayList<>();
     private final IFamiliaMapper mapper = IFamiliaMapper.INSTANCE;
+    private final IFamiliaRepository familiaRepository;
+
+    public FamiliaService( IFamiliaRepository familiaRepository) {
+        this.familiaRepository = familiaRepository;
+    }
 
     public FamiliaResponseDto cadastrarFamilia(FamiliaRequestDto familiaRequestDTO) {
         String cpfDoRepresentante = familiaRequestDTO.representante().cpf();
@@ -20,13 +29,14 @@ public class FamiliaService implements IFamiliaService {
         verificarRepresentanteOuConjugeJaCadastrado(cpfDoRepresentante, cpfDoConjuge);
 
         Familia familia = mapper.toModel(familiaRequestDTO);
-        familias.add(familia);
+        familiaRepository.adicionarFamilia(familia);
 
         FamiliaResponseDto familiaResponse = mapper.toDto(familia);
         return familiaResponse;
     }
 
     private void verificarRepresentanteOuConjugeJaCadastrado(String cpfDoRepresentante, String cpfDoConjuge) {
+        familias.addAll(familiaRepository.obterFamilias());
         boolean cpfJaCadastrado = familias.stream().anyMatch(
                 f -> cpfEstaCadastrado(f, cpfDoRepresentante)
                         || (cpfDoConjuge != null && cpfEstaCadastrado(f, cpfDoConjuge)));

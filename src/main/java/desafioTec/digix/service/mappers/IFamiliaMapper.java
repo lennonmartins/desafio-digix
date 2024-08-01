@@ -5,10 +5,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import desafioTec.digix.dtos.ConjugeDto;
-import desafioTec.digix.dtos.FamiliaRequestDto;
-import desafioTec.digix.dtos.FamiliaResponseDto;
-import desafioTec.digix.dtos.RepresentanteDto;
+import desafioTec.digix.dto.ConjugeDto;
+import desafioTec.digix.dto.FamiliaRequestDto;
+import desafioTec.digix.dto.FamiliaResponseDto;
+import desafioTec.digix.dto.RepresentanteDto;
 import desafioTec.digix.model.Conjuge;
 import desafioTec.digix.model.Familia;
 import desafioTec.digix.model.Representante;

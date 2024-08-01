@@ -3,13 +3,16 @@ package desafioTec.digix.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import desafioTec.digix.criteria.CriterioDependentes1ou2;
 import desafioTec.digix.criteria.CriterioDependentes3ouMais;
 import desafioTec.digix.criteria.CriterioPontuacao;
 import desafioTec.digix.criteria.CriterioRenda901Ate1500;
 import desafioTec.digix.criteria.CriterioRendaAte900;
 
-public class CriterioFactory {
+@Component
+public class CriterioFactory implements ICriterioFactory {
     public List<CriterioPontuacao> criarCriterios() {
         List<CriterioPontuacao> criterios = new ArrayList<>();
         criterios.add(new CriterioRenda901Ate1500());

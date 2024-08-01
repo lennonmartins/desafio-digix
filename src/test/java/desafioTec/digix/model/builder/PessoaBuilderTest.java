@@ -5,21 +5,24 @@ import java.time.LocalDate;
 import desafioTec.digix.model.Pessoa;
 
 public abstract class PessoaBuilderTest<T extends Pessoa, B extends PessoaBuilderTest<T, B>> {
-    protected String nome;
-    protected String cpf;
-    protected LocalDate dataDeNascimento;
+    protected String nome = "Lennon dos Santos";
+    protected LocalDate dataDeNascimento = LocalDate.of(2010, 1, 21);
+    protected String cpf = "57808353060";
 
-    public B nome(String nome) {
+    @SuppressWarnings("unchecked")
+    public B comNome(String nome) {
         this.nome = nome;
         return (B) this;
     }
 
-    public B cpf(String cpf) {
+    @SuppressWarnings("unchecked")
+    public B comCpf(String cpf) {
         this.cpf = cpf;
         return (B) this;
     }
 
-    public B dataDeNascimento(LocalDate dataDeNascimento) {
+    @SuppressWarnings("unchecked")
+    public B comDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
         return (B) this;
     }

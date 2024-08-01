@@ -21,11 +21,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import desafioTec.digix.controller.builder.FamiliaRequestDtoBuilder;
-import desafioTec.digix.dtos.ConjugeDto;
-import desafioTec.digix.dtos.DependenteDto;
-import desafioTec.digix.dtos.FamiliaRequestDto;
-import desafioTec.digix.dtos.FamiliaResponseDto;
-import desafioTec.digix.dtos.RepresentanteDto;
+import desafioTec.digix.dto.ConjugeDto;
+import desafioTec.digix.dto.DependenteDto;
+import desafioTec.digix.dto.FamiliaRequestDto;
+import desafioTec.digix.dto.FamiliaResponseDto;
+import desafioTec.digix.dto.RepresentanteDto;
 import desafioTec.digix.service.FamiliaService;
 
 @SpringBootTest

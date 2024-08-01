@@ -44,4 +44,9 @@ public class FamiliaBuilderTest {
         this.conjuge = conjuge;
         return this;
     }
+
+    public FamiliaBuilderTest comRepresentante(Representante representante){
+        this.representante = representante;
+        return this;
+    }
 }

@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import desafioTec.digix.dtos.ConjugeDto;
-import desafioTec.digix.dtos.DependenteDto;
-import desafioTec.digix.dtos.FamiliaRequestDto;
-import desafioTec.digix.dtos.RepresentanteDto;
+import desafioTec.digix.dto.ConjugeDto;
+import desafioTec.digix.dto.DependenteDto;
+import desafioTec.digix.dto.FamiliaRequestDto;
+import desafioTec.digix.dto.RepresentanteDto;
 
 public class FamiliaRequestDtoBuilder {
     private RepresentanteDto representante;

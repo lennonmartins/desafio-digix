@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import desafioTec.digix.model.Dependente;
 import desafioTec.digix.model.Familia;
 import desafioTec.digix.model.builder.DependenteBuilderTest;
 import desafioTec.digix.model.builder.FamiliaBuilderTest;
 
+@SpringBootTest
 public class ObtemFamiliaTest {
     
     private CriterioFactory criterioFactory;
@@ -19,7 +21,7 @@ public class ObtemFamiliaTest {
     @BeforeEach
     void setUp(){
         criterioFactory = new CriterioFactory();
-        calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory.criarCriterios());
+        calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory);
         obtemFamilia = new ObtemFamilia(calculadoraPontuacao);
     }
 

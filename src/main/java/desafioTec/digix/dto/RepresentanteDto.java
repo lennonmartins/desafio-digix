@@ -1,4 +1,4 @@
-package desafioTec.digix.dtos;
+package desafioTec.digix.dto;
 
 import java.time.LocalDate;
 

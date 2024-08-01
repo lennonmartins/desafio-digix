@@ -58,6 +58,11 @@ public class Familia {
     }
 
     public void adicionarPontuacao(int pontuacao) {
-        this.pontuacao += pontuacao;
+        this.pontuacao = pontuacao;
+    }
+
+    public int obterTotaisDedependentesValidos(){
+        filtrarDependentesValidosParaSorteio();
+        return this.totaisDedependentesValidos;
     }
 }

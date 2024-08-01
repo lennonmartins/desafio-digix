@@ -12,12 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import desafioTec.digix.model.builder.ConjugeBuilderTest;
 import desafioTec.digix.model.builder.DependenteBuilderTest;
 import desafioTec.digix.model.builder.FamiliaBuilderTest;
 import desafioTec.digix.model.builder.RepresentanteBuilderTest;
 
+@SpringBootTest
 public class FamiliaTest {
 
     private static Stream<Arguments> forneceFamiliaComDadosNegativos() {
@@ -51,13 +53,13 @@ public class FamiliaTest {
 
     @Test
     public void deve_criar_familia_com_dependentes_maiores_de_18_anos() {
-        Dependente dependenteAdulto = new DependenteBuilderTest().comDataDeNascimento(LocalDate.of(1995, 01, 21)).criar();
+        Dependente dependenteAdulto = new DependenteBuilderTest().comNome("Thiago").comDataDeNascimento(LocalDate.of(1995, 02, 21)).criar();
         int dependentesValidosDoSorteio = 1;
         int dependentesTotais = 2;
         Familia familia = new FamiliaBuilderTest().comDependente(dependenteAdulto).criar();
         familia.filtrarDependentesValidosParaSorteio();
         
-        assertEquals(dependentesValidosDoSorteio, familia.getTotaisDedependentesValidos());
+        assertEquals(dependentesValidosDoSorteio, familia.obterTotaisDedependentesValidos());
         assertEquals(dependentesTotais, familia.getDependentes().size());
     }
 

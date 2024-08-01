@@ -8,25 +8,27 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import desafioTec.digix.model.Dependente;
 import desafioTec.digix.model.Familia;
 import desafioTec.digix.model.builder.DependenteBuilderTest;
 import desafioTec.digix.model.builder.FamiliaBuilderTest;
 
+@SpringBootTest
 public class ListagemFamiliaServiceTest {
 
     private CalculadoraPontuacao calculadoraPontuacao;
     private CriterioFactory criterioFactory;
-    private ListagemFamiliaService familiaService;
+    private ListagemFamiliaService listagemService;
     private IObtemFamilia obtemFamilia;
 
     @BeforeEach
     public void setUp() {
         criterioFactory = new CriterioFactory();
-        calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory.criarCriterios());
+        calculadoraPontuacao = new CalculadoraPontuacao(criterioFactory);
         obtemFamilia = new ObtemFamilia(calculadoraPontuacao);
-        familiaService = new ListagemFamiliaService(obtemFamilia);
+        listagemService = new ListagemFamiliaService(obtemFamilia);
     }
 
     @Test
@@ -37,7 +39,7 @@ public class ListagemFamiliaServiceTest {
         Familia familia3 = new FamiliaBuilderTest().comRenda(1600).criar();
 
         List<Familia> familias = new ArrayList<>(Arrays.asList(familia2, familia3, familia1));
-        var listagemOrdenada = familiaService.ordernarListaDeFamiliaPorPonto(familias);
+        var listagemOrdenada = listagemService.ordernarListaDeFamiliaPorPonto(familias);
         assertEquals(familia1, listagemOrdenada.get(0));
     }
 }
