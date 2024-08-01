@@ -2,7 +2,6 @@ package desafioTec.digix.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import desafioTec.digix.dtos.FamiliaRequestDto;
 import desafioTec.digix.dtos.FamiliaResponseDto;
@@ -15,21 +14,30 @@ public class FamiliaService implements IFamiliaService {
     private final IFamiliaMapper mapper = IFamiliaMapper.INSTANCE;
 
     public FamiliaResponseDto cadastrarFamilia(FamiliaRequestDto familiaRequestDTO) {
+        String cpfDoRepresentante = familiaRequestDTO.representante().cpf();
+        String cpfDoConjuge = familiaRequestDTO.conjuge() != null ? familiaRequestDTO.conjuge().cpf() : null;
 
-        verificarRepresentanteJaCadastrado(familiaRequestDTO.representante().cpf());
+        verificarRepresentanteOuConjugeJaCadastrado(cpfDoRepresentante, cpfDoConjuge);
 
         Familia familia = mapper.toModel(familiaRequestDTO);
-
         familias.add(familia);
 
         FamiliaResponseDto familiaResponse = mapper.toDto(familia);
         return familiaResponse;
     }
 
-    private void verificarRepresentanteJaCadastrado(String cpfDoRepresentante) {
-       Optional<Familia> familiaCadastrada = familias.stream().filter(
-        f -> f.getRepresentante().getCpf().getValorCpf().equals(cpfDoRepresentante)).findFirst();
+    private void verificarRepresentanteOuConjugeJaCadastrado(String cpfDoRepresentante, String cpfDoConjuge) {
+        boolean cpfJaCadastrado = familias.stream().anyMatch(
+                f -> cpfEstaCadastrado(f, cpfDoRepresentante)
+                        || (cpfDoConjuge != null && cpfEstaCadastrado(f, cpfDoConjuge)));
 
-        if (familiaCadastrada.isPresent()) throw new IllegalArgumentException(MensagemErro.REPRESENTANTE_JA_CADASTRADO);
+        if (cpfJaCadastrado)
+            throw new IllegalArgumentException(MensagemErro.REPRESENTANTE_CONJUGE_JA_CADASTRADO);
+
+    }
+
+    private boolean cpfEstaCadastrado(Familia familia, String cpf) {
+        return familia.getRepresentante().getCpf().getValorCpf().equals(cpf) ||
+                (familia.getConjuge() != null && familia.getConjuge().getCpf().getValorCpf().equals(cpf));
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import desafioTec.digix.controller.PontuacaoController;
 import desafioTec.digix.criteria.CriterioPontuacao;
+import desafioTec.digix.model.Conjuge;
 import desafioTec.digix.model.Dependente;
 import desafioTec.digix.model.Familia;
 import desafioTec.digix.model.Representante;
@@ -46,7 +47,7 @@ public class DigixApplication {
 			System.out.println("Digite a quantidade de dependentes (com menos de 18 anos) totais:");
 			int dependentesDafmailia = scanner.nextInt();
 
-			familiasCadastradas.add(new Familia(new Representante(null, null, null),rendaDaFamilia, new ArrayList<Dependente>()));
+			familiasCadastradas.add(new Familia(new Representante(null, null, null),rendaDaFamilia, new ArrayList<Dependente>(), new Conjuge(null, null, null)));
 			System.out.println("Família cadastrada com sucesso!");
 			System.out.println("Digite 1 para cadastrar famílias e 0 para imprimir a lista de familias ordenadas");
 			opcao = scanner.nextInt();

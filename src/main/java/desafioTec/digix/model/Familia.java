@@ -16,30 +16,32 @@ public class Familia {
     private List<Dependente> dependentes = new ArrayList<>();
     private int totaisDedependentesValidos;
     private int pontuacao = 0;
+    private Conjuge conjuge;
 
-    public Familia(Representante representante, int rendaTotal, List<Dependente> dependentes) {
+    public Familia(Representante representante, int rendaTotal, List<Dependente> dependentes, Conjuge conjuge) {
 
-        this.representante = obterRepresentanteValido(representante);
-        this.rendaTotal = obterRendaValida(rendaTotal);
+        this.representante = validarRepresentante(representante);
+        this.rendaTotal = validarRenda(rendaTotal);
         this.dependentes = Collections
                 .unmodifiableList(Objects.requireNonNull(dependentes, MensagensErro.NUMERO_DEPENDENTES_NULOS));
+        this.conjuge = conjuge;
     }
 
-    private Representante obterRepresentanteValido(Representante representante) {
+    private Representante validarRepresentante(Representante representante) {
         if (representante == null) {
             throw new IllegalArgumentException(MensagensErro.REPRESENTANTE_NULO);
         }
         return representante;
     }
 
-    private int obterRendaValida(int rendaTotal) {
+    private int validarRenda(int rendaTotal) {
         if (rendaTotal < 0) {
             throw new IllegalArgumentException(MensagensErro.RENDA_NEGATIVA);
         }
         return rendaTotal;
     }
 
-    public void obterDependentesValidos() {
+    public void filtrarDependentesValidosParaSorteio() {
         int dependentesValidos = 0;
         LocalDate hoje = LocalDate.now();
         for (var dependente : this.dependentes) {

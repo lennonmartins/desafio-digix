@@ -5,9 +5,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
+import desafioTec.digix.dtos.ConjugeDto;
 import desafioTec.digix.dtos.FamiliaRequestDto;
 import desafioTec.digix.dtos.FamiliaResponseDto;
 import desafioTec.digix.dtos.RepresentanteDto;
+import desafioTec.digix.model.Conjuge;
 import desafioTec.digix.model.Familia;
 import desafioTec.digix.model.Representante;
 import desafioTec.digix.model.valor.Cpf;
@@ -17,6 +19,7 @@ public interface IFamiliaMapper {
     IFamiliaMapper INSTANCE = Mappers.getMapper(IFamiliaMapper.class);
 
     @Mapping(source = "representante.cpf", target = "representante.cpf", qualifiedByName = "cpfToString")
+    @Mapping(source = "conjuge.cpf", target = "conjuge.cpf", qualifiedByName = "cpfToString")
     FamiliaResponseDto toDto(Familia model);
 
     @Named("cpfToString")
@@ -32,4 +35,10 @@ public interface IFamiliaMapper {
     @Mapping(target = "dataDeNascimento", source = "dataDeNascimento")
     @Mapping(target = "nome", source = "nome")
     Representante toModel(RepresentanteDto dto);
+
+    @Mapping(target = "dataDeNascimento", source = "dataDeNascimento")
+    @Mapping(target = "nome", source = "nome")
+    @Mapping(target = "cpf", source = "cpf")
+    Conjuge toModel(ConjugeDto dto);
+    
 }

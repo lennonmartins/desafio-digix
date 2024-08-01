@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import desafioTec.digix.controller.builder.FamiliaRequestDtoBuilder;
+import desafioTec.digix.dtos.ConjugeDto;
 import desafioTec.digix.dtos.DependenteDto;
 import desafioTec.digix.dtos.FamiliaRequestDto;
 import desafioTec.digix.dtos.FamiliaResponseDto;
@@ -52,10 +53,12 @@ public class FamiliaControllerTest {
                         new DependenteDto("Maria", LocalDate.of(2010, 1, 1)),
                         new DependenteDto("José", LocalDate.of(2012, 1, 1))))
                 .criar();
+        
+                var conjugeDto = new ConjugeDto("Vitoria", LocalDate.of(1980, 1, 1), "57808353060");
 
         var familiaResponseDto = new FamiliaResponseDto(representanteDto, 800, Arrays.asList(
                 new DependenteDto("Maria", LocalDate.of(2010, 1, 1)),
-                new DependenteDto("José", LocalDate.of(2012, 1, 1))));
+                new DependenteDto("José", LocalDate.of(2012, 1, 1))), conjugeDto);
 
         when(familiaService.cadastrarFamilia(any(FamiliaRequestDto.class))).thenReturn(familiaResponseDto);
 
