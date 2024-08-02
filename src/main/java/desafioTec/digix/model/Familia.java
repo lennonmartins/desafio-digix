@@ -7,14 +7,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import lombok.Getter;
 
 @Getter
+@Entity
 public class Familia {
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Representante representante;
     private double rendaTotal;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "familia_id")
     private List<Dependente> dependentes = new ArrayList<>();
     private int pontuacao = 0;
+    @OneToOne(cascade = CascadeType.ALL)
     private Conjuge conjuge;
     private static final int IDADE_ADULTA = 18;
 

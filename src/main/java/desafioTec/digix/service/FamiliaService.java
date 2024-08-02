@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import desafioTec.digix.dto.FamiliaRequestDto;
 import desafioTec.digix.dto.FamiliaResponseDto;
 import desafioTec.digix.model.Familia;
+import desafioTec.digix.repository.FamiliaRepositoryDAO;
 import desafioTec.digix.repository.IFamiliaRepository;
 import desafioTec.digix.service.mappers.IFamiliaMapper;
 
@@ -17,9 +18,11 @@ public class FamiliaService implements IFamiliaService {
     private final List<Familia> familias = new ArrayList<>();
     private final IFamiliaMapper mapper = IFamiliaMapper.INSTANCE;
     private final IFamiliaRepository familiaRepository;
+    private final FamiliaRepositoryDAO familiaRepositoryDAO;
 
-    public FamiliaService( IFamiliaRepository familiaRepository) {
+    public FamiliaService( IFamiliaRepository familiaRepository,FamiliaRepositoryDAO familiaRepositoryDAO) {
         this.familiaRepository = familiaRepository;
+        this.familiaRepositoryDAO = familiaRepositoryDAO;
     }
 
     public FamiliaResponseDto cadastrarFamilia(FamiliaRequestDto familiaRequestDTO) {
@@ -30,6 +33,7 @@ public class FamiliaService implements IFamiliaService {
 
         Familia familia = mapper.toModel(familiaRequestDTO);
         familiaRepository.adicionarFamilia(familia);
+        familiaRepositoryDAO.save(familia);
 
         FamiliaResponseDto familiaResponse = mapper.toDto(familia);
         return familiaResponse;
@@ -37,6 +41,7 @@ public class FamiliaService implements IFamiliaService {
 
     private void verificarRepresentanteOuConjugeJaCadastrado(String cpfDoRepresentante, String cpfDoConjuge) {
         familias.addAll(familiaRepository.obterFamilias());
+        List<Familia> familias = familiaRepositoryDAO.findAll();
         boolean cpfJaCadastrado = familias.stream().anyMatch(
                 f -> cpfEstaCadastrado(f, cpfDoRepresentante)
                         || (cpfDoConjuge != null && cpfEstaCadastrado(f, cpfDoConjuge)));
