@@ -6,7 +6,7 @@ public class CriterioDependentes1ou2 implements CriterioPontuacao {
 
     @Override
     public int calcularPontucao(Familia familia) {
-        int dependentes = familia.obterTotaisDedependentesValidos();
+        int dependentes = familia.obterTotaisDeDedependentesAptos();
         return (dependentes == 1 || dependentes == 2) ? 2 : 0;
     }
 }

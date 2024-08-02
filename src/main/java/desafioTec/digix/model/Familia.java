@@ -16,6 +16,7 @@ public class Familia {
     private List<Dependente> dependentes = new ArrayList<>();
     private int pontuacao = 0;
     private Conjuge conjuge;
+    private static final int IDADE_ADULTA = 18;
 
     public Familia(Representante representante, double rendaTotal, List<Dependente> dependentes, Conjuge conjuge) {
 
@@ -44,24 +45,24 @@ public class Familia {
         int dependentesValidos = 0;
         LocalDate hoje = LocalDate.now();
         for (var dependente : this.dependentes) {
-            if (ehDependenteValido(dependente, hoje)) {
+            if (ehDependenteAptoAoSorteio(dependente, hoje))
                 dependentesValidos++;
-            }
         }
         return dependentesValidos;
     }
 
-    private boolean ehDependenteValido(Dependente dependente, LocalDate hoje) {
-        return dependente.getDataDeNascimento() != null &&
-                Period.between(dependente.getDataDeNascimento(), hoje).getYears() <= 18;
+    private boolean ehDependenteAptoAoSorteio(Dependente dependente, LocalDate hoje) {
+        if (dependente.getDataDeNascimento() == null) {
+            throw new IllegalArgumentException(MensagensErro.DATA_DE_NASCIMENTO_VAZIA_OU_NULA);
+        }
+        return Period.between(dependente.getDataDeNascimento(), hoje).getYears() <= IDADE_ADULTA;
     }
 
     public void adicionarPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
     }
 
-    public int obterTotaisDedependentesValidos(){
-        
+    public int obterTotaisDeDedependentesAptos() {
         return filtrarDependentesValidosParaSorteio();
     }
 }
